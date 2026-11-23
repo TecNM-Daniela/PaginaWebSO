@@ -4,13 +4,14 @@ La página tiene como objetivo presentar información sobre los principales conc
 ![Portada](portada3.png)
 # Sistemas Operativos
 
-**Nombre:** Daniela Isabel Holguín Holguín
+**Integrantes:**
+Holguin Holguin Daniela Isabel
 
-**Nombre:** Luis Gabriel Rodriguez Castillo
+Rodriguez Castillo Luis Gabriel
 
-**Nombre:** Victor Manuel Vazquez Lopez
+Vazquez Lopez Victor Manuel
 
-**Nombre:** Santos Zahid Zavala Ramirez
+Zavala Ramírez Santos Zahid
 
 **Carrera:** Ingeniería en Sistemas Computacionales
 

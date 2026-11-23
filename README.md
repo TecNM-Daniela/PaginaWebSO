@@ -5,8 +5,11 @@ La página tiene como objetivo presentar información sobre los principales conc
 # Sistemas Operativos
 
 **Nombre:** Daniela Isabel Holguín Holguín
+
 **Nombre:** Luis Gabriel Rodriguez Castillo
+
 **Nombre:** Victor Manuel Vazquez Lopez
+
 **Nombre:** Santos Zahid Zavala Ramirez
 
 **Carrera:** Ingeniería en Sistemas Computacionales

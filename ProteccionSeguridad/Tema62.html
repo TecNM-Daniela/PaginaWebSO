@@ -1,0 +1,383 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>6.2 Clasificación de seguridad</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #f5f5f5;
+            color: #222;
+            font-family: Arial, sans-serif;
+        }
+
+        .navbar {
+            background: #111;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .navbar-brand {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .menu {
+            display: flex;
+            align-items: center;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-btn {
+            color: white;
+            text-decoration: none;
+            padding: 12px;
+        }
+
+        .dropdown-btn:hover {
+            color: #d0d0d0;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 100%;
+            background: white;
+            min-width: 250px;
+            box-shadow: 0 8px 16px rgba(0,0,0,.2);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .dropdown-content a {
+            display: block;
+            color: #222;
+            padding: 12px 16px;
+            text-decoration: none;
+        }
+
+        .dropdown-content a:hover {
+            background: #eee;
+        }
+
+        .dropdown:hover .dropdown-content,
+        .dropdown:focus-within .dropdown-content {
+            display: block;
+        }
+
+        .hero {
+            background:
+                linear-gradient(90deg, rgba(0,0,0,.92), rgba(50,50,50,.65)),
+                url('https://images.unsplash.com/photo-1510511459019-5dda7724fd87?auto=format&fit=crop&w=1600&q=85')
+                center/cover;
+            color: white;
+            padding: 85px 7%;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin: 12px 0;
+        }
+
+        .hero p {
+            font-size: 19px;
+        }
+
+        .contenido {
+            background: white;
+            max-width: 1100px;
+            margin: -30px auto 0;
+            padding: 35px;
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(0,0,0,.10);
+            position: relative;
+        }
+
+        h2 {
+            color: #111;
+            margin-top: 30px;
+        }
+
+        .tarjetas {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .tarjeta {
+            background: #fafafa;
+            border: 1px solid #d8d8d8;
+            border-radius: 12px;
+            padding: 23px;
+            transition: .3s;
+        }
+
+        .tarjeta:hover {
+            box-shadow: 0 10px 25px rgba(0,0,0,.12);
+        }
+
+        .icono {
+            font-size: 32px;
+            color: #333;
+        }
+
+        .tarjeta h3 {
+            margin-top: 12px;
+        }
+
+        .dato {
+            background: #efefef;
+            border-left: 4px solid #555;
+            padding: 18px;
+            border-radius: 8px;
+            margin: 18px 0;
+        }
+
+        .clasificacion {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .imagen {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 13px;
+        }
+
+        .botones {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            margin-top: 40px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 22px;
+            border: 1px solid #111;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: .3s;
+        }
+
+        .btn-anterior {
+            color: #111;
+            background: white;
+        }
+
+        .btn-siguiente {
+            color: white;
+            background: #111;
+        }
+
+        .btn:hover {
+            background: #333;
+            color: white;
+        }
+
+        footer {
+            background: #111;
+            color: white;
+            text-align: center;
+            padding: 30px 15px;
+            margin-top: 55px;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: #d0d0d0;
+        }
+
+        @media (max-width: 700px) {
+            .navbar {
+                padding: 18px 5%;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .contenido {
+                margin: -20px 12px 0;
+                padding: 22px;
+            }
+
+            .tarjetas,
+            .clasificacion {
+                grid-template-columns: 1fr;
+            }
+
+            .botones {
+                flex-direction: column;
+            }
+
+            .btn {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <a class="navbar-brand" href="index.html">PROTECCIÓN Y SEGURIDAD</a>
+
+        <div class="menu">
+            <div class="dropdown">
+                <a href="#" class="dropdown-btn">Contenido ▾</a>
+
+                <div class="dropdown-content">
+                    <a href="Tema61.html">6.1 Concepto y objetivos</a>
+                    <a href="Tema62.html">6.2 Clasificación</a>
+                    <a href="Tema63.html">6.3 Funciones</a>
+                    <a href="Tema64.html">6.4 Matrices de acceso</a>
+                    <a href="Tema65.html">6.5 Protección basada en lenguaje</a>
+                    <a href="Tema66.html">6.6 Validación y amenazas</a>
+                    <a href="Tema67.html">6.7 Cifrado</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <span><strong>UNIDAD 3 · TEMA 6.2</strong></span>
+        <h1>Clasificación aplicada a la seguridad</h1>
+        <p>Tipos de seguridad y medidas que ayudan a proteger los equipos, los datos y las comunicaciones.</p>
+    </header>
+
+    <main class="contenido">
+
+        <h2 style="margin-top: 0;">¿Cómo se clasifica la seguridad?</h2>
+
+        <p>La seguridad informática puede organizarse en diferentes categorías según el elemento que se desea proteger. Cada una utiliza medidas específicas, pero todas trabajan en conjunto para reducir los riesgos dentro de una organización o sistema.</p>
+
+        <div class="tarjetas">
+
+            <div class="tarjeta">
+                <div class="icono">🏢</div>
+                <h3>1. Seguridad física</h3>
+                <p>Protege los equipos, instalaciones y dispositivos contra daños, robos o accesos físicos no autorizados.</p>
+                <strong>Ejemplos:</strong>
+                <ul>
+                    <li>Cámaras de vigilancia.</li>
+                    <li>Puertas con acceso controlado.</li>
+                    <li>Alarmas y protección eléctrica.</li>
+                </ul>
+            </div>
+
+            <div class="tarjeta">
+                <div class="icono">🔒</div>
+                <h3>2. Seguridad lógica</h3>
+                <p>Protege los programas, archivos, cuentas y datos mediante controles establecidos por software.</p>
+                <strong>Ejemplos:</strong>
+                <ul>
+                    <li>Contraseñas y autenticación.</li>
+                    <li>Permisos de archivos.</li>
+                    <li>Antivirus y firewalls.</li>
+                </ul>
+            </div>
+
+            <div class="tarjeta">
+                <div class="icono">📋</div>
+                <h3>3. Seguridad administrativa</h3>
+                <p>Establece políticas, responsabilidades y procedimientos para el uso correcto de los recursos tecnológicos.</p>
+                <strong>Ejemplos:</strong>
+                <ul>
+                    <li>Reglas para crear contraseñas.</li>
+                    <li>Capacitación de usuarios.</li>
+                    <li>Políticas de respaldo de información.</li>
+                </ul>
+            </div>
+
+            <div class="tarjeta">
+                <div class="icono">🌐</div>
+                <h3>4. Seguridad de red</h3>
+                <p>Protege la comunicación y el intercambio de información entre computadoras y otros dispositivos.</p>
+                <strong>Ejemplos:</strong>
+                <ul>
+                    <li>Firewalls de red.</li>
+                    <li>Conexiones cifradas.</li>
+                    <li>Monitoreo del tráfico de red.</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <h2>Clasificación según el momento de protección</h2>
+
+        <div class="clasificacion">
+
+            <div class="dato">
+                <strong>Prevención</strong>
+                <p>Medidas que buscan evitar que ocurra un incidente, como utilizar permisos y actualizar el sistema.</p>
+            </div>
+
+            <div class="dato">
+                <strong>Detección</strong>
+                <p>Herramientas que identifican actividades extrañas, como alertas y registros del sistema.</p>
+            </div>
+
+            <div class="dato">
+                <strong>Recuperación</strong>
+                <p>Acciones para restaurar los servicios y la información después de un problema.</p>
+            </div>
+
+        </div>
+
+        <h2>Ejemplo de aplicación</h2>
+
+        <img class="imagen"
+             src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1200&q=85"
+             alt="Seguridad informática y protección de datos">
+
+        <p>En una empresa, la seguridad física puede aplicarse mediante cámaras y controles de entrada; la seguridad lógica, mediante cuentas de usuario y permisos; la administrativa, mediante políticas internas; y la seguridad de red, mediante firewalls y conexiones protegidas.</p>
+
+        <div class="dato">
+            Ninguna clasificación funciona de manera aislada. La combinación de las diferentes medidas permite obtener una protección más completa.
+        </div>
+
+        <div class="botones">
+            <a href="Tema61.html" class="btn btn-anterior">← Tema anterior</a>
+            <a href="Tema63.html" class="btn btn-siguiente">Siguiente tema →</a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>Protección y Seguridad | Sistemas Operativos</p>
+        <p>
+            Referencias: Tanenbaum y Bos, Sistemas operativos modernos;
+            Stallings, Sistemas operativos;
+            NIST,
+            <a href="https://csrc.nist.gov/" target="_blank">Computer Security Resource Center</a>.
+        </p>
+    </footer>
+
+</body>
+</html>

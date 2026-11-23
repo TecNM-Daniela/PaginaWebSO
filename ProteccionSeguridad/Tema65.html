@@ -1,0 +1,372 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>6.5 Protección basada en lenguaje</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f5f5f5;
+            color: #222222;
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+
+        .navbar,
+        footer {
+            background: #111111;
+            color: white;
+        }
+
+        .navbar {
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .navbar-brand {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-btn {
+            color: white;
+            text-decoration: none;
+            padding: 12px;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 100%;
+            background: white;
+            min-width: 250px;
+            box-shadow: 0 8px 16px rgba(0,0,0,.2);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .dropdown-content a {
+            display: block;
+            color: #222;
+            padding: 12px 16px;
+            text-decoration: none;
+        }
+
+        .dropdown-content a:hover {
+            background: #eee;
+        }
+
+        .dropdown:hover .dropdown-content,
+        .dropdown:focus-within .dropdown-content {
+            display: block;
+        }
+
+        .hero {
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(0,0,0,.92),
+                    rgba(50,50,50,.65)
+                ),
+                url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1600&q=85')
+                center/cover;
+            color: white;
+            padding: 85px 7%;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin-top: 10px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-top: 15px;
+        }
+
+        .contenido {
+            background: white;
+            padding: 35px;
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(0,0,0,.10);
+            margin: -30px auto 0;
+            position: relative;
+            max-width: 1100px;
+            width: 86%;
+        }
+
+        h2 {
+            color: #111111;
+            font-weight: 700;
+            margin-top: 30px;
+        }
+
+        .contenido img {
+            width: 100%;
+            border-radius: 16px;
+            margin-bottom: 15px;
+        }
+
+        .tarjetas {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .tarjeta {
+            background: #fafafa;
+            border: 1px solid #d8d8d8;
+            border-radius: 12px;
+            padding: 22px;
+            transition: .3s;
+        }
+
+        .tarjeta:hover {
+            box-shadow: 0 10px 25px rgba(0,0,0,.12);
+        }
+
+        .icono {
+            font-size: 30px;
+            color: #333333;
+        }
+
+        .dato {
+            background: #efefef;
+            border-left: 4px solid #555555;
+            padding: 18px;
+            border-radius: 8px;
+            margin: 18px 0;
+        }
+
+        pre {
+            background: #1a1a1a;
+            color: #f5f5f5;
+            border-radius: 12px;
+            padding: 22px;
+            overflow-x: auto;
+            border: 1px solid #444444;
+        }
+
+        .botones {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            margin-top: 50px;
+        }
+
+        .btn {
+            transition: .3s;
+            padding: 10px 22px;
+            border-radius: 8px;
+            text-decoration: none;
+            border: 1px solid #111111;
+        }
+
+        .btn-primary {
+            background: #111111;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #333333;
+        }
+
+        .btn-outline-primary {
+            background: white;
+            color: #111111;
+        }
+
+        .btn-outline-primary:hover {
+            background: #111111;
+            color: white;
+        }
+
+        footer {
+            padding: 30px 7%;
+            margin-top: 55px;
+            text-align: center;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: #d0d0d0;
+        }
+
+        @media (max-width: 700px) {
+            .navbar {
+                padding: 18px 5%;
+            }
+
+            .navbar-brand {
+                font-size: 15px;
+            }
+
+            .hero {
+                padding: 65px 7%;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .contenido {
+                padding: 22px;
+                width: 92%;
+            }
+
+            .tarjetas {
+                grid-template-columns: 1fr;
+            }
+
+            .botones {
+                flex-direction: column;
+            }
+
+            .btn {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<nav class="navbar">
+    <a class="navbar-brand" href="index.html">PROTECCIÓN Y SEGURIDAD</a>
+
+    <div class="dropdown">
+        <a href="#" class="dropdown-btn">Contenido ▾</a>
+
+        <div class="dropdown-content">
+            <a href="Tema61.html">6.1 Concepto y objetivos</a>
+            <a href="Tema62.html">6.2 Clasificación</a>
+            <a href="Tema63.html">6.3 Funciones</a>
+            <a href="Tema64.html">6.4 Matrices de acceso</a>
+            <a href="Tema65.html">6.5 Protección basada en lenguaje</a>
+            <a href="Tema66.html">6.6 Validación y amenazas</a>
+            <a href="Tema67.html">6.7 Cifrado</a>
+        </div>
+    </div>
+</nav>
+
+<header class="hero">
+    <span style="color:white; font-weight:bold;">
+        UNIDAD 3 · TEMA 6.5
+    </span>
+
+    <h1>Protección basada en lenguaje</h1>
+
+    <p>El uso de las características de los lenguajes de programación para establecer reglas y restricciones.</p>
+</header>
+
+<main class="contenido">
+
+    <h2 style="margin-top:0;">¿Qué es la protección basada en lenguaje?</h2>
+
+    <p>La protección basada en lenguaje utiliza las características de los lenguajes de programación para controlar cómo se utilizan los datos y recursos dentro de un programa. Permite establecer restricciones, definir quién puede acceder a ciertos elementos y limitar las operaciones que se pueden realizar.</p>
+
+    <p>Este tipo de protección ayuda a detectar errores y a evitar que una parte del programa modifique información que solamente debería ser utilizada por otra parte.</p>
+
+    <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&w=1200&q=85" alt="Programación y código">
+
+    <h2>¿Cómo funciona?</h2>
+
+    <p>Los lenguajes de programación cuentan con mecanismos que permiten organizar y proteger los elementos de un programa. Por ejemplo, algunos lenguajes permiten declarar atributos privados, utilizar métodos públicos y establecer tipos de datos.</p>
+
+    <div class="tarjetas">
+
+        <div class="tarjeta">
+            <div class="icono">🔒</div>
+            <h3>Encapsulamiento</h3>
+            <p>Permite ocultar los datos internos de una clase y controlar su acceso mediante métodos.</p>
+        </div>
+
+        <div class="tarjeta">
+            <div class="icono">{ }</div>
+            <h3>Tipos de datos</h3>
+            <p>Ayudan a definir qué clase de información puede almacenar una variable y qué operaciones admite.</p>
+        </div>
+
+        <div class="tarjeta">
+            <div class="icono">🛡️</div>
+            <h3>Control de acceso</h3>
+            <p>Permite establecer qué partes del programa pueden utilizar determinados elementos.</p>
+        </div>
+
+    </div>
+
+    <h2>Ejemplo en programación C#</h2>
+
+    <p>En C#, el modificador <strong>private</strong> evita que un atributo sea modificado directamente desde fuera de su clase. Para consultar o cambiar su valor se pueden utilizar métodos o propiedades públicas.</p>
+
+    <pre><code>class Usuario
+{
+    private string nombre;
+
+    public void AsignarNombre(string nuevoNombre)
+    {
+        nombre = nuevoNombre;
+    }
+
+    public string ObtenerNombre()
+    {
+        return nombre;
+    }
+}</code></pre>
+
+    <p>En este ejemplo, el atributo <strong>nombre</strong> es privado. Por eso, otras clases no pueden modificarlo directamente; deben utilizar los métodos que ofrece la clase Usuario.</p>
+
+    <h2>Ventajas</h2>
+
+    <ul>
+        <li>Ayuda a proteger los datos internos de los programas.</li>
+        <li>Permite organizar mejor el código.</li>
+        <li>Reduce modificaciones no autorizadas.</li>
+        <li>Facilita el mantenimiento y la detección de ciertos errores.</li>
+    </ul>
+
+    <div class="dato">
+        La protección basada en lenguaje complementa los mecanismos del sistema operativo, pero no los sustituye. También se necesitan controles de acceso y medidas de seguridad adicionales.
+    </div>
+
+    <div class="botones">
+        <a href="Tema64.html" class="btn btn-outline-primary">← Tema anterior</a>
+        <a href="Tema66.html" class="btn btn-primary">Siguiente tema →</a>
+    </div>
+
+</main>
+
+<footer>
+    <p>Protección y Seguridad | Sistemas Operativos</p>
+
+    <p>
+        Referencias: Stallings, Sistemas operativos; Tanenbaum y Bos, Sistemas operativos modernos; documentación de
+        <a href="https://learn.microsoft.com/es-es/dotnet/csharp/" target="_blank">C# de Microsoft</a>.
+    </p>
+</footer>
+
+</body>
+</html>

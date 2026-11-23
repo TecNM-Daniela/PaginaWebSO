@@ -1,0 +1,425 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>6.3 Funciones de protección</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f5f5f5;
+            color: #222222;
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+
+        .navbar,
+        footer {
+            background: #111111;
+            color: white;
+        }
+
+        .navbar {
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .navbar-brand {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-btn {
+            color: white;
+            text-decoration: none;
+            padding: 12px;
+        }
+
+        .dropdown-btn:hover {
+            color: #d0d0d0;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 100%;
+            background: white;
+            min-width: 250px;
+            box-shadow: 0 8px 16px rgba(0,0,0,.2);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .dropdown-content a {
+            display: block;
+            color: #222;
+            padding: 12px 16px;
+            text-decoration: none;
+        }
+
+        .dropdown-content a:hover {
+            background: #eee;
+        }
+
+        .dropdown:hover .dropdown-content,
+        .dropdown:focus-within .dropdown-content {
+            display: block;
+        }
+
+        .hero {
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(0,0,0,.92),
+                    rgba(50,50,50,.65)
+                ),
+                url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1600&q=85')
+                center/cover;
+            color: white;
+            padding: 85px 7%;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .hero p {
+            font-size: 19px;
+            margin-top: 15px;
+        }
+
+        .contenido {
+            background: white;
+            max-width: 1100px;
+            padding: 35px;
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(0,0,0,.10);
+            margin: -30px auto 0;
+            position: relative;
+        }
+
+        h2 {
+            color: #111111;
+            font-weight: 700;
+            margin-top: 30px;
+        }
+
+        .tarjetas {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+            margin-top: 20px;
+        }
+
+        .tarjeta {
+            background: #fafafa;
+            border: 1px solid #d8d8d8;
+            border-radius: 12px;
+            padding: 22px;
+            height: 100%;
+            transition: .3s;
+        }
+
+        .tarjeta:hover {
+            box-shadow: 0 10px 25px rgba(0,0,0,.12);
+        }
+
+        .icono {
+            font-size: 30px;
+            color: #333333;
+        }
+
+        .tarjeta h5 {
+            font-size: 18px;
+            margin-top: 12px;
+            margin-bottom: 10px;
+        }
+
+        .pasos {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .paso {
+            background: #efefef;
+            border-left: 4px solid #555555;
+            border-radius: 12px;
+            padding: 22px;
+            height: 100%;
+        }
+
+        .paso h5 {
+            margin-top: 0;
+        }
+
+        .imagen {
+            width: 100%;
+            height: auto;
+            max-height: 350px;
+            object-fit: cover;
+            border-radius: 16px;
+            margin-bottom: 15px;
+        }
+
+        .alert-primary {
+            background: #efefef;
+            border: 0;
+            border-left: 4px solid #555555;
+            color: #222222;
+            border-radius: 8px;
+            padding: 18px;
+            margin-top: 24px;
+        }
+
+        .botones {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            margin-top: 40px;
+        }
+
+        .btn {
+            display: inline-block;
+            transition: .3s;
+            padding: 10px 22px;
+            border-radius: 8px;
+            text-decoration: none;
+            border: 1px solid #111111;
+        }
+
+        .btn-primary {
+            background-color: #111111;
+            border-color: #111111;
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            background-color: #333333;
+            border-color: #333333;
+            color: #ffffff;
+        }
+
+        .btn-outline-primary {
+            background-color: #ffffff;
+            border-color: #111111;
+            color: #111111;
+        }
+
+        .btn-outline-primary:hover {
+            background-color: #111111;
+            border-color: #111111;
+            color: #ffffff;
+        }
+
+        footer {
+            padding: 30px 15px;
+            margin-top: 55px;
+            text-align: center;
+        }
+
+        footer a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: #d0d0d0;
+        }
+
+        @media (max-width: 700px) {
+            .navbar {
+                padding: 18px 5%;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .contenido {
+                margin: -20px 12px 0;
+                padding: 22px;
+            }
+
+            .tarjetas {
+                grid-template-columns: 1fr;
+            }
+
+            .pasos {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .botones {
+                flex-direction: column;
+            }
+
+            .btn {
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 450px) {
+            .pasos {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<nav class="navbar">
+    <a class="navbar-brand" href="index.html">PROTECCIÓN Y SEGURIDAD</a>
+
+    <div class="dropdown">
+        <a href="#" class="dropdown-btn">Contenido ▾</a>
+
+        <div class="dropdown-content">
+            <a href="Tema61.html">6.1 Concepto y objetivos</a>
+            <a href="Tema62.html">6.2 Clasificación</a>
+            <a href="Tema63.html">6.3 Funciones</a>
+            <a href="Tema64.html">6.4 Matrices de acceso</a>
+            <a href="Tema65.html">6.5 Protección basada en lenguaje</a>
+            <a href="Tema66.html">6.6 Validación y amenazas</a>
+            <a href="Tema67.html">6.7 Cifrado</a>
+        </div>
+    </div>
+</nav>
+
+<header class="hero">
+    <span style="color:white;" class="fw-bold">
+        UNIDAD 3 · TEMA 6.3
+    </span>
+
+    <h1>Funciones del sistema de protección</h1>
+
+    <p>Mecanismos que controlan el acceso de usuarios y programas a los recursos del sistema.</p>
+</header>
+
+<main class="contenido">
+
+    <h2 style="margin-top: 0;">¿Qué hace un sistema de protección?</h2>
+
+    <p>El sistema de protección de un sistema operativo administra los permisos y establece límites para que los usuarios y procesos solamente puedan realizar las operaciones que tienen autorizadas. De esta manera, ayuda a evitar que un programa interfiera con otros o que un usuario modifique información que no le corresponde.</p>
+
+    <h2>Funciones principales</h2>
+
+    <div class="tarjetas">
+
+        <div class="tarjeta">
+            <div class="icono">👤</div>
+            <h5>Identificación</h5>
+            <p>Permite reconocer qué usuario o proceso está solicitando utilizar un recurso.</p>
+        </div>
+
+        <div class="tarjeta">
+            <div class="icono">🔍</div>
+            <h5>Autenticación</h5>
+            <p>Comprueba la identidad del usuario mediante contraseñas, códigos u otros métodos.</p>
+        </div>
+
+        <div class="tarjeta">
+            <div class="icono">🛡️</div>
+            <h5>Autorización</h5>
+            <p>Determina qué acciones puede realizar una persona después de identificarse.</p>
+        </div>
+
+        <div class="tarjeta">
+            <div class="icono">🔑</div>
+            <h5>Control de acceso</h5>
+            <p>Permite o rechaza las solicitudes de acuerdo con los permisos establecidos.</p>
+        </div>
+
+        <div class="tarjeta">
+            <div class="icono">📋</div>
+            <h5>Auditoría</h5>
+            <p>Registra actividades importantes para revisar quién utilizó un recurso y cuándo lo hizo.</p>
+        </div>
+
+        <div class="tarjeta">
+            <div class="icono">📦</div>
+            <h5>Aislamiento</h5>
+            <p>Evita que los procesos interfieran indebidamente con otros procesos o con el sistema operativo.</p>
+        </div>
+
+    </div>
+
+    <h2>Proceso de control de acceso</h2>
+
+    <p>Cuando una persona intenta utilizar un archivo o programa, el sistema realiza una serie de comprobaciones antes de permitir la operación.</p>
+
+    <div class="pasos">
+
+        <div class="paso">
+            <h5>01. Solicitud</h5>
+            <p>El usuario intenta abrir o modificar un recurso.</p>
+        </div>
+
+        <div class="paso">
+            <h5>02. Identidad</h5>
+            <p>El sistema reconoce y verifica al usuario.</p>
+        </div>
+
+        <div class="paso">
+            <h5>03. Permisos</h5>
+            <p>Se revisan los permisos asignados al usuario.</p>
+        </div>
+
+        <div class="paso">
+            <h5>04. Resultado</h5>
+            <p>Se permite o se rechaza la operación.</p>
+        </div>
+
+    </div>
+
+    <h2>Ejemplo práctico</h2>
+
+    <img
+        src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=85"
+        class="imagen"
+        alt="Usuario trabajando en computadora">
+
+    <p>Cuando un estudiante inicia sesión en una computadora, el sistema verifica su cuenta. Después, le permite acceder a sus documentos y aplicaciones autorizadas. Si intenta instalar un programa y no cuenta con permisos de administrador, el sistema puede impedir esa acción.</p>
+
+    <div class="alert-primary">
+        Las funciones de protección trabajan en conjunto para mantener controlado el uso de los recursos y reducir los accesos indebidos.
+    </div>
+
+    <div class="botones">
+        <a href="Tema62.html" class="btn btn-outline-primary">← Tema anterior</a>
+        <a href="Tema64.html" class="btn btn-primary">Siguiente tema →</a>
+    </div>
+
+</main>
+
+<footer>
+    <p>Protección y Seguridad | Sistemas Operativos</p>
+
+    <p>
+        Referencias: Stallings, Sistemas operativos; Tanenbaum y Bos, Sistemas operativos modernos; NIST,
+        <a href="https://csrc.nist.gov/" target="_blank">Computer Security Resource Center</a>.
+    </p>
+</footer>
+
+</body>
+</html>

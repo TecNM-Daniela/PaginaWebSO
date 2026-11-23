@@ -1,0 +1,459 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>6.4 Matrices de acceso</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f5f5f5;
+            color: #222222;
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+
+        .navbar,
+        footer {
+            background: #111111;
+            color: white;
+        }
+
+        .navbar {
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .navbar-brand {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-btn {
+            color: white;
+            text-decoration: none;
+            padding: 12px;
+        }
+
+        .dropdown-btn:hover {
+            color: #d0d0d0;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 100%;
+            background: white;
+            min-width: 250px;
+            box-shadow: 0 8px 16px rgba(0,0,0,.2);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .dropdown-content a {
+            display: block;
+            color: #222;
+            padding: 12px 16px;
+            text-decoration: none;
+        }
+
+        .dropdown-content a:hover {
+            background: #eee;
+        }
+
+        .dropdown:hover .dropdown-content,
+        .dropdown:focus-within .dropdown-content {
+            display: block;
+        }
+
+        .hero {
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(0,0,0,.92),
+                    rgba(50,50,50,.65)
+                ),
+                url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1600&q=85')
+                center/cover;
+            color: white;
+            padding: 85px 7%;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .hero p {
+            font-size: 19px;
+            margin-top: 15px;
+        }
+
+        .contenido {
+            background: white;
+            max-width: 1100px;
+            padding: 35px;
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(0,0,0,.10);
+            margin: -30px auto 0;
+            position: relative;
+        }
+
+        h2 {
+            color: #111111;
+            font-weight: 700;
+            margin-top: 30px;
+        }
+
+        .imagen {
+            width: 100%;
+            height: auto;
+            max-height: 350px;
+            object-fit: cover;
+            border-radius: 16px;
+            margin-bottom: 15px;
+        }
+
+        .tarjetas {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-top: 20px;
+        }
+
+        .tarjetas-dos {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+            margin-top: 20px;
+        }
+
+        .tarjeta {
+            background: #fafafa;
+            border: 1px solid #d8d8d8;
+            border-radius: 12px;
+            padding: 22px;
+            height: 100%;
+            transition: .3s;
+        }
+
+        .tarjeta:hover {
+            box-shadow: 0 10px 25px rgba(0,0,0,.12);
+        }
+
+        .icono {
+            font-size: 30px;
+            color: #333333;
+        }
+
+        .tarjeta h5 {
+            font-size: 18px;
+            margin-top: 12px;
+            margin-bottom: 10px;
+        }
+
+        .dato {
+            background: #efefef;
+            border-left: 4px solid #555555;
+            padding: 18px;
+            border-radius: 8px;
+            margin: 18px 0;
+        }
+
+        .tabla-contenedor {
+            width: 100%;
+            overflow-x: auto;
+            margin-top: 15px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+            vertical-align: middle;
+            min-width: 550px;
+        }
+
+        th, td {
+            border: 1px solid #cccccc;
+            padding: 13px;
+        }
+
+        .table-primary th {
+            background-color: #222222;
+            color: #ffffff;
+            border-color: #444444;
+            font-weight: 600;
+        }
+
+        tbody th {
+            background: #f0f0f0;
+        }
+
+        tbody tr:hover {
+            background: #f5f5f5;
+        }
+
+        .botones {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            margin-top: 40px;
+        }
+
+        .btn {
+            display: inline-block;
+            transition: .3s;
+            padding: 10px 22px;
+            border-radius: 8px;
+            text-decoration: none;
+            border: 1px solid #111111;
+        }
+
+        .btn-primary {
+            background-color: #111111;
+            border-color: #111111;
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            background-color: #333333;
+            border-color: #333333;
+            color: #ffffff;
+        }
+
+        .btn-outline-primary {
+            background-color: #ffffff;
+            border-color: #111111;
+            color: #111111;
+        }
+
+        .btn-outline-primary:hover {
+            background-color: #111111;
+            border-color: #111111;
+            color: #ffffff;
+        }
+
+        footer {
+            padding: 30px 15px;
+            margin-top: 55px;
+            text-align: center;
+        }
+
+        footer a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: #d0d0d0;
+        }
+
+        @media (max-width: 750px) {
+            .navbar {
+                padding: 18px 5%;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .contenido {
+                margin: -20px 12px 0;
+                padding: 22px;
+            }
+
+            .tarjetas {
+                grid-template-columns: 1fr;
+            }
+
+            .tarjetas-dos {
+                grid-template-columns: 1fr;
+            }
+
+            .botones {
+                flex-direction: column;
+            }
+
+            .btn {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<nav class="navbar">
+    <a class="navbar-brand" href="index.html">PROTECCIÓN Y SEGURIDAD</a>
+
+    <div class="dropdown">
+        <a href="#" class="dropdown-btn">Contenido ▾</a>
+
+        <div class="dropdown-content">
+            <a href="Tema61.html">6.1 Concepto y objetivos</a>
+            <a href="Tema62.html">6.2 Clasificación</a>
+            <a href="Tema63.html">6.3 Funciones</a>
+            <a href="Tema64.html">6.4 Matrices de acceso</a>
+            <a href="Tema65.html">6.5 Protección basada en lenguaje</a>
+            <a href="Tema66.html">6.6 Validación y amenazas</a>
+            <a href="Tema67.html">6.7 Cifrado</a>
+        </div>
+    </div>
+</nav>
+
+<header class="hero">
+    <span style="color:white;" class="fw-bold">
+        UNIDAD 3 · TEMA 6.4
+    </span>
+
+    <h1>Implementación de matrices de acceso</h1>
+
+    <p>Una forma de organizar y representar los permisos de los usuarios sobre los recursos del sistema.</p>
+</header>
+
+<main class="contenido">
+
+    <h2 style="margin-top: 0;">¿Qué es una matriz de acceso?</h2>
+
+    <p>Una matriz de acceso es un modelo que representa los permisos que tienen los usuarios o procesos sobre los diferentes recursos de un sistema. Su función es indicar qué operaciones puede realizar cada usuario sobre un objeto, como leer un archivo, modificarlo o ejecutarlo.</p>
+
+    <img
+        src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&w=1200&q=85"
+        class="imagen"
+        alt="Información y programación">
+
+    <h2>Elementos de la matriz</h2>
+
+    <div class="tarjetas">
+
+        <div class="tarjeta">
+            <div class="icono">👤</div>
+            <h5>Usuarios o dominios</h5>
+            <p>Se colocan en las filas y representan quién solicita utilizar un recurso.</p>
+        </div>
+
+        <div class="tarjeta">
+            <div class="icono">📁</div>
+            <h5>Objetos</h5>
+            <p>Se colocan en las columnas y representan archivos, carpetas, dispositivos o procesos.</p>
+        </div>
+
+        <div class="tarjeta">
+            <div class="icono">🔓</div>
+            <h5>Permisos</h5>
+            <p>Se encuentran en las celdas e indican qué operaciones están autorizadas.</p>
+        </div>
+
+    </div>
+
+    <h2>Ejemplo de una matriz de acceso</h2>
+
+    <p>La siguiente tabla muestra cómo podrían organizarse los permisos en una computadora escolar:</p>
+
+    <div class="tabla-contenedor">
+        <table>
+            <thead class="table-primary">
+                <tr>
+                    <th>Usuario</th>
+                    <th>Archivo A</th>
+                    <th>Archivo B</th>
+                    <th>Impresora</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <th>Administrador</th>
+                    <td>Leer y escribir</td>
+                    <td>Leer y escribir</td>
+                    <td>Utilizar</td>
+                </tr>
+
+                <tr>
+                    <th>Estudiante 1</th>
+                    <td>Leer</td>
+                    <td>Sin acceso</td>
+                    <td>Utilizar</td>
+                </tr>
+
+                <tr>
+                    <th>Estudiante 2</th>
+                    <td>Leer y escribir</td>
+                    <td>Leer</td>
+                    <td>Sin acceso</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="dato">
+        <strong>¿Cómo se interpreta?</strong>
+        <p>El estudiante 1 puede consultar el Archivo A y utilizar la impresora, pero no puede acceder al Archivo B. El administrador tiene más permisos sobre los recursos.</p>
+    </div>
+
+    <h2>Formas de implementación</h2>
+
+    <div class="tarjetas-dos">
+
+        <div class="tarjeta">
+            <div class="icono">☷</div>
+            <h5>Listas de control de acceso (ACL)</h5>
+            <p>Se asocia a cada objeto una lista que indica qué usuarios pueden acceder y qué permisos tienen. Por ejemplo, un archivo puede tener una lista de usuarios autorizados para leerlo o modificarlo.</p>
+        </div>
+
+        <div class="tarjeta">
+            <div class="icono">🔐</div>
+            <h5>Listas de capacidades</h5>
+            <p>Se asocia a cada usuario o proceso una lista de objetos a los que puede acceder y las operaciones que puede realizar sobre ellos.</p>
+        </div>
+
+    </div>
+
+    <h2>Ventajas y utilidad</h2>
+
+    <ul>
+        <li>Organiza los permisos de manera clara.</li>
+        <li>Ayuda a evitar accesos no autorizados.</li>
+        <li>Permite asignar diferentes niveles de acceso.</li>
+        <li>Facilita la administración de archivos y otros recursos.</li>
+    </ul>
+
+    <div class="botones">
+        <a href="Tema63.html" class="btn btn-outline-primary">← Tema anterior</a>
+        <a href="Tema65.html" class="btn btn-primary">Siguiente tema →</a>
+    </div>
+
+</main>
+
+<footer>
+    <p>Protección y Seguridad | Sistemas Operativos</p>
+
+    <p>
+        Referencias: Tanenbaum y Bos, Sistemas operativos modernos;
+        Stallings, Sistemas operativos;
+        NIST,
+        <a href="https://csrc.nist.gov/" target="_blank">Computer Security Resource Center</a>.
+    </p>
+</footer>
+
+</body>
+</html>

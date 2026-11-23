@@ -1,0 +1,610 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protección y Seguridad | Sistemas Operativos</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f5f5f5;
+            color: #222;
+            font-family: Arial, sans-serif;
+        }
+
+        /* MENU */
+
+        .navbar {
+            background: #000;
+            padding: 20px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .navbar h3 {
+            font-size: 20px;
+        }
+
+        .menu {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 25px;
+            left: 0;
+            background: #fff;
+            min-width: 260px;
+            list-style: none;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 8px 20px #0002;
+            z-index: 1000;
+        }
+
+        .dropdown:hover .dropdown-menu,
+        .dropdown:focus-within .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 10px;
+            color: #222;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .dropdown-menu a:hover {
+            background: #e5e5e5;
+            color: #111;
+        }
+
+        /* PORTADA */
+
+        .portada {
+            min-height: 560px;
+            display: flex;
+            align-items: center;
+            background:
+                linear-gradient(90deg, rgba(0,0,0,.95), rgba(50,50,50,.65)),
+                url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1800&q=85')
+                center/cover;
+            color: white;
+            padding: 60px 8%;
+        }
+
+        .portada h1 {
+            font-size: clamp(40px, 5vw, 70px);
+            font-weight: 800;
+        }
+
+        .portada p {
+            font-size: 19px;
+            max-width: 650px;
+            line-height: 1.6;
+            margin-top: 20px;
+        }
+
+        .etiqueta {
+            color: #d4d4d4;
+            letter-spacing: 3px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .linea {
+            width: 75px;
+            height: 5px;
+            background: #666;
+            margin: 22px 0;
+        }
+
+        /* SECCIONES */
+
+        .seccion {
+            padding: 75px 8%;
+        }
+
+        .titulo {
+            color: #111;
+            font-size: 34px;
+            margin: 15px 0;
+        }
+
+        .subtitulo {
+            color: #666;
+            max-width: 750px;
+            margin: auto;
+            line-height: 1.6;
+        }
+
+        .introduccion {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .introduccion > div {
+            flex: 1;
+        }
+
+        .introduccion p {
+            line-height: 1.8;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .imagen-intro {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px #0002;
+        }
+
+        /* TARJETAS */
+
+        .contenedor-tarjetas {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-top: 45px;
+        }
+
+        .tarjeta {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 15px;
+            padding: 25px;
+            transition: .25s;
+        }
+
+        .tarjeta:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 28px #0002;
+        }
+
+        .numero {
+            color: #444;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .icono {
+            font-size: 35px;
+            margin: 20px 0;
+        }
+
+        .tarjeta h3 {
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .tarjeta p {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .tarjeta a {
+            color: #222;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .tarjeta a:hover {
+            color: #777;
+        }
+
+        /* INFORMACION */
+
+        .panel {
+            background: white;
+            border-radius: 16px;
+            padding: 35px;
+            box-shadow: 0 8px 25px #0002;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .dato {
+            font-size: 18px;
+            line-height: 1.6;
+            border-left: 4px solid #555;
+            padding-left: 15px;
+            margin-bottom: 20px;
+        }
+
+        .dato strong {
+            font-size: 20px;
+        }
+
+        .integrantes h2 {
+            margin-bottom: 20px;
+        }
+
+        .integrante {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 15px 0;
+            border-bottom: 1px solid #ddd;
+            font-size: 17px;
+            font-weight: 500;
+        }
+
+        .foto-integrante {
+            width: 85px;
+            height: 85px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #808080;
+        }
+
+        /* PIE DE PAGINA */
+
+        footer {
+            background: #000;
+            color: #d0d0d0;
+            padding: 35px 8%;
+        }
+
+        footer h3 {
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        footer p {
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        footer a {
+            color: white;
+        }
+
+        .derechos {
+            text-align: center;
+            border-top: 1px solid #444;
+            padding-top: 20px;
+            margin-top: 25px;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 900px) {
+            .introduccion {
+                flex-direction: column;
+            }
+
+            .contenedor-tarjetas {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .panel {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .menu {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 12px;
+            }
+
+            .dropdown-menu {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .contenedor-tarjetas {
+                grid-template-columns: 1fr;
+            }
+
+            .portada {
+                min-height: 450px;
+            }
+
+            .titulo {
+                font-size: 27px;
+            }
+
+            .foto-integrante {
+                width: 65px;
+                height: 65px;
+            }
+
+            .integrante {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <a href="index.html"><h3>PROTECCIÓN Y SEGURIDAD</h3></a>
+
+        <ul class="menu">
+            <li class="dropdown">
+                <a href="#">Contenido ▼</a>
+
+                <ul class="dropdown-menu">
+                    <li><a href="Tema61.html">6.1 Concepto y objetivos</a></li>
+                    <li><a href="Tema62.html">6.2 Clasificación de seguridad</a></li>
+                    <li><a href="Tema63.html">6.3 Funciones de protección</a></li>
+                    <li><a href="Tema64.html">6.4 Matrices de acceso</a></li>
+                    <li><a href="Tema65.html">6.5 Protección basada en lenguaje</a></li>
+                    <li><a href="Tema66.html">6.6 Validación y amenazas</a></li>
+                    <li><a href="Tema67.html">6.7 Cifrado</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <header class="portada">
+        <div>
+            <span class="etiqueta">
+                INGENIERÍA EN SISTEMAS COMPUTACIONALES
+            </span>
+
+            <div class="linea"></div>
+
+            <h1>Protección y<br>Seguridad</h1>
+
+            <h3 style="margin-top:25px;">
+                Sistemas Operativos | Unidad 3
+            </h3>
+
+            <p>
+                Conoce los mecanismos, herramientas y principios que permiten proteger
+                los recursos y la información de los sistemas informáticos.
+            </p>
+        </div>
+    </header>
+
+    <section class="seccion">
+        <div class="introduccion">
+
+            <div>
+                <span style="color:#555;font-weight:bold;">
+                    INTRODUCCIÓN
+                </span>
+
+                <h2 class="titulo">
+                    La importancia de proteger los sistemas informáticos
+                </h2>
+
+                <div class="linea"></div>
+
+                <p>
+                    Los sistemas operativos son una parte fundamental de las computadoras,
+                    ya que administran los recursos del equipo, ejecutan programas y permiten
+                    que los usuarios interactúen con la información.
+                </p>
+
+                <p>
+                    Debido a que manejan datos personales, archivos y procesos importantes,
+                    necesitan mecanismos de protección y seguridad que eviten el acceso
+                    de personas no autorizadas, la pérdida de información y el uso incorrecto
+                    de los recursos.
+                </p>
+
+                <p>
+                    La protección establece permisos y límites para los usuarios y programas,
+                    mientras que la seguridad reúne medidas para prevenir riesgos y mantener
+                    la confidencialidad, integridad y disponibilidad de la información.
+                </p>
+
+                <p>
+                    En esta unidad se explican los principales conceptos de protección,
+                    las funciones de los sistemas de seguridad, las matrices de acceso,
+                    la validación, las amenazas y el uso del cifrado.
+                </p>
+            </div>
+
+            <div>
+                <img
+                    class="imagen-intro"
+                    src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1100&q=85"
+                    alt="Seguridad informática">
+            </div>
+
+        </div>
+    </section>
+
+    <section class="seccion">
+
+        <div style="text-align:center;">
+            <span style="color:#555;font-weight:bold;">
+                TEMARIO
+            </span>
+
+            <h2 class="titulo">
+                Contenido de la unidad 3
+            </h2>
+
+            <p class="subtitulo">
+                Selecciona uno de los siguientes temas para consultar su explicación,
+                características y ejemplos.
+            </p>
+        </div>
+
+        <div class="contenedor-tarjetas">
+
+            <div class="tarjeta">
+                <div class="numero">Tema 6.1</div>
+                <div class="icono">🛡️</div>
+                <h3>Concepto y objetivos de protección y seguridad</h3>
+                <p>Conoce qué significan la protección y la seguridad y cuáles son sus objetivos principales.</p>
+                <a href="Tema61.html">Explorar tema →</a>
+            </div>
+
+            <div class="tarjeta">
+                <div class="numero">Tema 6.2</div>
+                <div class="icono">🔗</div>
+                <h3>Clasificación aplicada a la seguridad</h3>
+                <p>Identifica los diferentes tipos de seguridad y sus formas de aplicación.</p>
+                <a href="Tema62.html">Explorar tema →</a>
+            </div>
+
+            <div class="tarjeta">
+                <div class="numero">Tema 6.3</div>
+                <div class="icono">⚙️</div>
+                <h3>Funciones del sistema de protección</h3>
+                <p>Revisa cómo se administran los permisos y se controlan los recursos.</p>
+                <a href="Tema63.html">Explorar tema →</a>
+            </div>
+
+            <div class="tarjeta">
+                <div class="numero">Tema 6.4</div>
+                <div class="icono">▦</div>
+                <h3>Implementación de matrices de acceso</h3>
+                <p>Comprende cómo se representan los permisos de usuarios sobre distintos recursos.</p>
+                <a href="Tema64.html">Explorar tema →</a>
+            </div>
+
+            <div class="tarjeta">
+                <div class="numero">Tema 6.5</div>
+                <div class="icono">💻</div>
+                <h3>Protección basada en lenguaje</h3>
+                <p>Conoce cómo los lenguajes de programación pueden ayudar a establecer restricciones.</p>
+                <a href="Tema65.html">Explorar tema →</a>
+            </div>
+
+            <div class="tarjeta">
+                <div class="numero">Tema 6.6</div>
+                <div class="icono">⚠️</div>
+                <h3>Validación y amenazas al sistema</h3>
+                <p>Identifica la importancia de validar datos y reconocer posibles amenazas.</p>
+                <a href="Tema66.html">Explorar tema →</a>
+            </div>
+
+            <div class="tarjeta">
+                <div class="numero">Tema 6.7</div>
+                <div class="icono">🔒</div>
+                <h3>Cifrado</h3>
+                <p>Aprende cómo se transforma la información para mantenerla protegida.</p>
+                <a href="Tema67.html">Explorar tema →</a>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="seccion" style="padding-top:0;">
+
+        <div class="panel">
+
+            <div>
+                <div class="dato">
+                    <strong>Institución:</strong><br>
+                    Tecnológico Nacional de México - Tecnológico de Parral
+                </div>
+
+                <div class="dato">
+                    <strong>Carrera:</strong><br>
+                    Ingeniería en Sistemas Computacionales
+                </div>
+
+                <div class="dato">
+                    <strong>Materia:</strong><br>
+                    Sistemas Operativos
+                </div>
+
+                <div class="dato">
+                    <strong>Docente:</strong><br>
+                    MSC. Myrna Villegas Gaytán
+                </div>
+
+                <div class="dato">
+                    <strong>Periodo:</strong><br>
+                    Agosto - Diciembre 2026
+                </div>
+            </div>
+
+            <div class="integrantes">
+
+                <h2 class="titulo">Integrantes:</h2>
+
+                <div class="integrante">
+                    <img src="img/victor.png" alt="Víctor Manuel" class="foto-integrante">
+                    Vázquez López Víctor Manuel
+                </div>
+
+                <div class="integrante">
+                    <img src="img/luis.png" alt="Luis Gabriel" class="foto-integrante">
+                    Rodríguez Castillo Luis Gabriel
+                </div>
+
+                <div class="integrante">
+                    <img src="img/santos.png" alt="Santos Zahid" class="foto-integrante">
+                    Zavala Ramírez Santos Zahid
+                </div>
+
+                <div class="integrante">
+                    <img src="img/daniela.png" alt="Daniela Isabel" class="foto-integrante">
+                    Holguín Holguín Daniela Isabel
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer>
+
+        <h3>Referencias generales</h3>
+
+        <p>
+            Tanenbaum, A. S. y Bos, H. Sistemas operativos modernos.
+        </p>
+
+        <p>
+            Stallings, W. Sistemas operativos: aspectos internos y principios de diseño.
+        </p>
+
+        <p>
+            NIST:
+            <a href="https://csrc.nist.gov/" target="_blank">
+                Computer Security Resource Center
+            </a>.
+        </p>
+
+        <div class="derechos">
+            <p>Tecnológico de Parral | 2026</p>
+        </div>
+
+    </footer>
+
+</body>
+</html>
